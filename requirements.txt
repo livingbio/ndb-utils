@@ -1,0 +1,8 @@
+django
+pyyaml
+Pillow
+coverage
+unittest2
+nose
+gcloud
+-e git://github.com/lucemia/gcloud-python-orm.git@master#egg=gcloudorm

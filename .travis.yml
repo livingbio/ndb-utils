@@ -1,0 +1,19 @@
+language: python
+python:
+    - "2.7"
+
+install:
+    - "pip install -r ./requirements.txt"
+
+before_script:
+  - wget https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.17.zip -nv
+  - unzip -q google_appengine_1.9.17.zip
+  - export PYTHONPATH=${PYTHONPATH}:google_appengine
+
+script:
+    - "nosetests --with-cov --cover-package=ndb_utils"
+
+notifications:
+  slack: tagtoo:nVKAkV8qa1GhV5COWbmdnKjY
+
+sudo: false
