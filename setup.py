@@ -19,7 +19,6 @@ REQUIREMENTS = [
     'unittest2',
     'nose',
     'gcloud',
-    'gcloudorm'
 ]
 
 setup(
