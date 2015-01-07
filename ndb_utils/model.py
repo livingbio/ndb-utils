@@ -48,7 +48,6 @@ class DatastoreMixin(models.Model):
 
     @property
     def ndb_model(self):
-        assert self._ndb_model is not None
         return self._ndb_model
 
     def save(self, *args, **kwargs):
@@ -60,8 +59,10 @@ class DatastoreMixin(models.Model):
         )
         obj.put()
 
-        self.last_sync = datetime.datetime.utcnow()
-        super(DatastoreMixin, self).save(*args, **kwargs)
+        # for some reason,
+        # use super(DatastoreMixin, self).save(*args, **kwargs)
+        # again here will raise utils.IntegrityError
+        self.objects.__class__.objects.filter(pk=obj.pk).update(last_sync=datetime.datetime.utcnow())
 
 
     def delete(self):
