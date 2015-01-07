@@ -48,6 +48,7 @@ class DatastoreMixin(models.Model):
 
     @property
     def ndb_model(self):
+        assert self._ndb_model is not None
         return self._ndb_model
 
     def save(self, *args, **kwargs):
@@ -58,7 +59,9 @@ class DatastoreMixin(models.Model):
             data=self.to_datastore_dict()
         )
         obj.put()
+
         self.last_sync = datetime.datetime.utcnow()
+        super(DatastoreMixin, self).save(*args, **kwargs)
 
 
     def delete(self):
