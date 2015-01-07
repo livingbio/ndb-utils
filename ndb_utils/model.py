@@ -58,11 +58,13 @@ class DatastoreMixin(models.Model):
             data=self.to_datastore_dict()
         )
         obj.put()
+        kwargs['force_update'] = True
+        super(DatastoreMixin, self).save(*args, **kwargs)
 
         # for some reason,
         # use super(DatastoreMixin, self).save(*args, **kwargs)
         # again here will raise utils.IntegrityError
-        self.objects.__class__.objects.filter(pk=obj.pk).update(last_sync=datetime.datetime.utcnow())
+        # self.objects.__class__.objects.filter(pk=obj.pk).update(last_sync=datetime.datetime.utcnow())
 
 
     def delete(self):
