@@ -35,6 +35,7 @@ class DatastoreMixin(models.Model):
     last_sync = models.DateTimeField(null=True, blank=True)
 
     _ndb_model = None
+    _auto_sync = True
 
     class Meta:
         abstract = True
@@ -52,7 +53,11 @@ class DatastoreMixin(models.Model):
 
     def save(self, *args, **kwargs):
         super(DatastoreMixin, self).save(*args, **kwargs)
+        if self._auto_sync:
+            self.sync()
 
+
+    def sync(self):
         obj = self.ndb_model.replace(
             id=self.datastore_id,
             data=self.to_datastore_dict()
@@ -62,10 +67,9 @@ class DatastoreMixin(models.Model):
         # NOTE:
         # while using objects.create, it will trigger save automatically
         # with kwargs with force_insert,
+        self.last_sync = datetime.datetime.now()
 
-        kwargs.pop('force_insert', None)
-        kwargs['force_update'] = True
-        super(DatastoreMixin, self).save(*args, **kwargs)
+        super(DatastoreMixin, self).save()
 
 
     def delete(self):
