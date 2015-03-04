@@ -4,5 +4,5 @@ Pillow
 coverage
 unittest2
 nose
-gcloud
--e git://github.com/lucemia/gcloud-python-orm.git@master#egg=gcloudorm
+gcloud==0.4.1
+-e git://github.com/lucemia/gcloud-python-orm.git@0.4.1#egg=gcloudorm
