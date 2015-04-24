@@ -26,8 +26,9 @@ class Datastore(ndb.Model):
 
     @classmethod
     def remove(cls, id):
+        from gcloud import datastore
         obj = cls(id=id)
-        obj.delete()
+        datastore.delete([obj.key])
 
 
 
