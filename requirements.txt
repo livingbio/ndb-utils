@@ -1,6 +1,6 @@
 # A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 # https://pypi.python.org/pypi/Django/1.9.1
-Django==1.9.1
+Django==4.2.30
 
 
 # YAML parser and emitter for Python
