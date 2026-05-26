@@ -10,7 +10,7 @@ PyYAML==3.11
 
 # Python Imaging Library (Fork)
 # https://pypi.python.org/pypi/Pillow/3.1.0
-Pillow==3.1.0
+Pillow==12.2.0
 
 
 # Code coverage measurement for Python
